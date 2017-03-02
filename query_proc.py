@@ -50,4 +50,7 @@ def catch_all(path):
 
 # main
 if __name__ == "__main__":
-	app.run(host="0.0.0.0", port=8080, debug=True)
+  if len(sys.argv) == 4:
+    app.run(host=sys.argv[1], port=int(sys.argv[2]), debug=bool(sys.argv[3]))
+  else:
+    print "usage: %s LISTEN_IP PORT DEBUG" % (sys.argv[0])
