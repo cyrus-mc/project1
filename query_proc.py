@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import jsonify
 from flask import request
+from flask.ext.api import status
 import os.path
 import re
 import sys
@@ -47,7 +48,7 @@ def catch_all(path):
     contents = readFile('/proc/%s' % (path))
     return jsonify(contents)
   else:
-    return jsonify({"error": "Invalid filename specified"})
+    return jsonify({"error": "Invalid filename specified"}), status.HTTP_404_NOT_FOUND
 
 # main
 if __name__ == "__main__":
