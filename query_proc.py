@@ -2,26 +2,42 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 import os.path
+import re
 app = Flask(__name__)
 
 '''
-Read in file, split into key / value and return dictionary result
+Parse file into JSON
+
+Lines in the file can be in one of three formats
+
+   - key: array
+   - key: word
+   - array
 '''
-def readFile(filename, delimiter=':'):
-  output = dict()
 
-  # check if file exists
+def readFile(filename):
   if os.path.isfile(filename):
+    output = dict()
+    pattern = re.compile("^[a-zA-Z0-9_\(\)\s]+:")
     with open(filename) as f:
+      i = 0
       for line in f:
-        if len(line.split(delimiter)) == 2:
-          output[line.split(delimiter)[0].strip()] = line.split(delimiter)[1].strip()
+        i += 1
+        if pattern.match(line):
+          # this handles the first two cases (line starts with a key)
+          fields = line.split(':')[1].strip().split(' ')
+          if len(fields) == 1:
+            output[line.split(':')[0].strip()] = fields[0]
+          else:
+            output[line.split(':')[0].strip()] = line.split(':')[1].strip().split(' ')
         else:
-          output[line.split(delimiter)[0].strip()] = ''
-  else:
-    output['error'] = 'File %s does not exist' % (filename)
+          # handles final case, array of words
+          output['line_%d' % i] = line.strip().split(' ')
 
-  return output
+    return output
+
+  else:
+    return {'error': 'File %s does not exist' % (filename)}
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
