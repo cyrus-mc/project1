@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import jsonify
 from flask import request
-from flask.ext.api import status
+from flask_api import status
 import os.path
 import re
 import sys
