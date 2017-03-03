@@ -1,4 +1,15 @@
-# project1
+# Phase 1
 
-Simple Flask API service that returns contents of files, in json format.
+Simple API service to query /proc/{cpuinfo,meminfo,uptime} packaged in a
+Ubuntu 14.04 Vagrant image.
+
+Usage:
+
+  - checkout repository
+  - vagrant up
+  - vagrant ssh
+
+Verify API service:
+
+  - curl -O http://localhost:1404/{cpuinfo,meminfo,uptime}
 
