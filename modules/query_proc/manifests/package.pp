@@ -55,7 +55,7 @@ class query_proc::package {
     tag    => 'apt'
   }
 
-  package { [ 'flask-api' ]:
+  package { [ 'flask', 'flask-api' ]:
     provider => 'pip',
     ensure   => 'present',
     tag      => 'pip'
