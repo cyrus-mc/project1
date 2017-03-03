@@ -3,19 +3,15 @@
 # update APT
 apt-get update
 
-# install python PIP
+# install necessary packages
 apt-get install -y python-pip
-
-# pip install Flask library
 pip install flask
+pip install flask-api
 
-# determine our public IP
-IP_ADDRESS=`hostname --all-ip-addresses`
+# copy files into place
+cp /home/vagrant/query_proc.py /srv/
+cp /home/vagrant/conf/query_proc /etc/default/
+cp /home/vagrant/upstart/query_proc /etc/init/query_proc.conf
 
-# port to start service on
-PORT=1440
-
-# debug Yes or no?
-DEBUG=True
-
-python query_proc.py $IP_ADDRESS $PORT $DEBUG &
+# finally, start the service
+service query_proc start

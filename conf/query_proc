@@ -1,3 +1,3 @@
-LISTEN_IP=localhost                                                             
+LISTEN_IP=`hostname --all-ip-addresses`
 PORT=1404
 DEBUG=False
