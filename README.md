@@ -6,11 +6,10 @@ Encapsulate service inside Vagrant Ubuntu 14.04 box, using shell provisioner. Ex
 
 Usage:
 
-  1) Bring up vagrant box: vagrant up
-  2) SSH to box: vagrant ssh
-  3) Retrieve Public IP: ip a s eth1
+  - Bring up vagrant box by issuing command vagrant up
+  - Determine IP assigned to bridge interface by SSHing into machine using vagrant ssh
+  - Run following command to retrieve the bridged interface IP: ip a s eth1
 
 Access API from any other machine on your network through http://PUBLIC_IP:1404/..
 
-If you want to change the LISTEN IP or PORT modify the upstart environment file in conf.
-
+To modify interface and port binding you can edit common.yaml in the hiera directory.
