@@ -1,3 +1,7 @@
-LISTEN_IP=`hostname --all-ip-addresses`
+# determine IP of adapter 2
+LISTEN_IP=`ifconfig eth1 | grep "inet\s" | awk '{print $2}' | awk -F: '{print $2}'`
+
+# listen on port 1404
 PORT=1404
+
 DEBUG=False
