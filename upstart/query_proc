@@ -1,0 +1,21 @@
+description "API service to query /proc information"
+author      "Matthew Ceroni"
+
+start on filesystem or runlevel [2345]
+stop on shutdown
+
+script
+  set -a
+  . /etc/default/query_proc
+  echo $$ > /var/run/query_proc.pid
+  exec /usr/bin/python /srv/query_proc.py  $LISTEN_IP $PORT $DEBUG
+end script
+
+pre-start script
+  echo "[`date`] Starting API server" >> /var/log/query_proc.log
+end script
+
+pre-stop script
+  rm /var/run/query_proc.pid
+  echo "[`date`] Stopping APi server" >> /var/log/query_proc.log
+end script

@@ -1,0 +1,3 @@
+LISTEN_IP=localhost                                                             
+PORT=1404
+DEBUG=False
