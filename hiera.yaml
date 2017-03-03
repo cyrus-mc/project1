@@ -1,0 +1,9 @@
+---
+:backends:
+  - yaml
+
+:herarchy:
+  - "common"
+
+:yaml:
+  :datadir: '/vagrant/hiera'

@@ -68,8 +68,8 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
-  config.vm.provision "file", source: "query_proc.py", destination: "query_proc.py"
-  config.vm.provision "file", source: "conf", destination: "conf"
-  config.vm.provision "file", source: "upstart", destination: "upstart"
-  config.vm.provision :shell, path: "install-api-env.sh"
+  config.vm.provision "puppet" do |puppet|
+    puppet.hiera_config_path = "hiera.yaml"
+    puppet.module_path = "modules"
+  end
 end
