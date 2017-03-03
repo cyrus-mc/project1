@@ -1,4 +1,0 @@
----
-listen_ip: $ipaddress_eth1
-port: '1404'
-debug: 'False'
